@@ -5,7 +5,7 @@ colorFrom: red
 colorTo: indigo
 sdk: gradio
 sdk_version: "6.9.0"
-python_version: "3.12"
+python_version: "3.10"
 app_file: app.py
 pinned: false
 ---
