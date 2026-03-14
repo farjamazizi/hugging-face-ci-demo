@@ -1,3 +1,6 @@
+# gradio==6.9.0
+# transformers==4.16.1
+# tensorflow
 gradio==6.9.0
-transformers==4.16.1
-tensorflow
+torch
+transformers<5
