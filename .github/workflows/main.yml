@@ -1,24 +1,32 @@
 name: Sync to Hugging Face hub
+
 on:
   push:
     branches: [main]
-
-  # to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Add remote 
+
+      - name: Sanity check token is present
         env:
           HF: ${{ secrets.HF }}
-        run: git remote add space https://farjamazizi:$HF@huggingface.co/spaces/farjamazizi/first_demo
-      - name: Push to hub
+        run: |
+          if [ -z "$HF" ]; then
+            echo "ERROR: GitHub secret HF is empty or missing."
+            exit 1
+          fi
+          echo "HF token detected (length=${#HF})"
+
+      - name: Push to Hugging Face Space
         env:
           HF: ${{ secrets.HF }}
-        run: git push --force https://farjamazizi:$HF@huggingface.co/spaces/farjamazizi/first_demo
-        
+        run: |
+          git remote remove space || true
+          git remote add space "https://farjamazizi:${HF}@huggingface.co/spaces/farjamazizi/first_demo"
+          git push --force space HEAD:main
