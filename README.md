@@ -1,5 +1,3 @@
-# hugging-face-ci-demo
-
 ---
 title: First Demo
 emoji: 📝
@@ -7,10 +5,11 @@ colorFrom: red
 colorTo: indigo
 sdk: gradio
 sdk_version: "6.9.0"
-python_version: "3.12.1"
+python_version: "3.12"
 app_file: app.py
 pinned: false
 ---
 
 # First Demo
-Your description here...
+
+A simple Transformers + Gradio text summarization demo.
